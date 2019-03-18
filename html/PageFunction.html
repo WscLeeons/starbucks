@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title></title>
+		<link rel="stylesheet" href="../css/swiper.min.css">
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			body{
+				padding: 20px;
+			}
+			h1,h2,h3,h4,h5,h6{
+				margin-bottom: 10px;
+				font-weight: 300;
+				color: mediumseagreen;
+			}
+			.padding{
+				padding: 10px;
+			}
+			.active{
+				opacity: 1;
+				visibility: visible;
+			}
+			.icon img{
+				display: block;
+				opacity: 0.8;
+				transition-duration: 0.1s;
+				-webkit-transition-duration: 0.1s;
+				transition-duration: 0.1s;
+				-webkit-transition-property: opacity, -webkit-transform;
+				transition-property: opacity, -webkit-transform;
+				transition-property: opacity, transform;
+				transition-property: opacity, transform, -webkit-transform;
+			}
+			.nav{
+				position: relative;
+				width: 200px;
+				height: 300px;
+			}
+			
+			.nav a{
+				float: right;
+				z-index: 1000;
+			}
+			.triggerclose{
+				position: absolute;
+				right: 4px;
+				top: 4px;
+				display: none;
+			}
+			.container{
+				clear: both;
+			}
+			.overlay,.container{
+				position: absolute;
+				right: 0;
+				top: 25px;
+				width: 200px;
+				height: 300px;
+				
+			}
+			.overlay>div{
+				opacity: 0;
+				visibility: hidden;
+				transform: scale(1.2);
+				background: #fff;
+				transition: all 0.1s linear;
+				z-index: 999;
+			}
+			.laylive{
+				opacity: 1 !important;
+				visibility: visible !important;
+				transform: scale(1.0) !important;
+			}
+			.carousel-figure{
+				/* width: 100%; */
+				margin-right: 0;
+			}
+			.carousel-figure img{
+				width: 100%;
+			}
+			.advance{
+				width: 48px;
+				background-image: url(../images/icon-arrow-white.svg);
+				right: 24px;
+				transition: all 0.3s;
+				outline: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>星巴克动态功能展示</h1>
+		<h2>效果1</h2>
+		<div class="nav">
+			<a href="#" class="icon triggeropen">
+				<img src="../images/icon-hamburger.svg" alt="" height="24px">
+			</a>
+			<a href="#" class="icon triggerclose">
+				<img src="../images/icon-close.svg" alt="" height="16px">
+			</a>
+			<div class="container">
+				<div>
+					dfdsgfdsfd <br>
+					sagerwgeagegegfegfe <br>
+					dfdsgfdsfd <br>
+					sagerwgeagegegfegfe <br>
+					dfdsgfdsfd <br>
+					sagerwgeagegegfegfe <br>
+				</div>
+			</div>
+			<div class="overlay">
+				<div>
+					第三方大哥发的<br>
+					个人股特人头费委托方<br>
+					第三方大哥发的<br>
+					个人股特人头费委托方<br>
+					第三方大哥发的<br>
+					个人股特人头费委托方<br>
+				</div>
+			</div>
+		</div>
+		
+		<h2>效果2</h2>
+		<div class="swiper-container carousel-figure">
+			<ul class="swiper-wrapper">
+				<li class="swiper-slide">
+					<a href=""><img src="../images/kv-cherry-blossom.jpg" ></a>
+				</li>
+				<li class="swiper-slide">
+					<a href=""><img src="../images/kv-bev-2.jpg" ></a>
+				</li>
+				<li class="swiper-slide">
+					<a href=""><img src="../images/kv-coffee-ice.jpg" ></a>
+				</li>
+				<li class="swiper-slide">
+					<a href=""><img src="../images/kv-ice.jpg" ></a>
+				</li>
+				<li class="swiper-slide">
+					<a href=""><img src="../images/kv-cake-2.jpg" ></a>
+				</li>
+			</ul>
+			<!-- 前进按钮 -->
+			<div class="swiper-button-next advance"></div>
+
+		</div>
+		
+		<script src="../js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$('.triggeropen').mousedown(function(){
+				$('.triggeropen>img').css('transform','scale(0.8)');
+			})
+			$('.triggeropen').mouseup(function(){
+				$('.triggeropen>img').css('transform','scale(1.0)');
+				$('.overlay>div').toggleClass('laylive')
+				$('.triggeropen').fadeOut(200);
+				$('.triggerclose').fadeIn(200);
+			})
+			$('.triggerclose').mousedown(function(){
+				$('.triggerclose>img').css('transform','scale(0.8)');
+			})
+			$('.triggerclose').mouseup(function(){
+				$('.triggerclose>img').css('transform','scale(1.0)');
+				$('.overlay>div').toggleClass('laylive')
+				$('.triggerclose').fadeOut(200);
+				$('.triggeropen').fadeIn(200);
+			})
+			
+			/*l轮播图*/
+			var mySwiper = new Swiper ('.swiper-container', {
+			speed:800,
+			loop: true,
+			touchStartPreventDefault : false,//解除对mousedown和up禁用
+			autoplay : {
+				delay:4000,//延时器 
+				disableOnInteraction: false,//点击按钮不会停止定时器
+			},
+			// 如果需要前进后退按钮
+			navigation: {
+				nextEl: '.swiper-button-next',
+			}
+			}) 
+			// 鼠标移入停止播放,移出开始播放
+			mySwiper.el.onmouseout =function(){
+				mySwiper.autoplay.start();
+			}
+			mySwiper.el.onmouseover =function(){
+				mySwiper.autoplay.stop();
+			}
+			// 前进点击、松开鼠标动画
+			$('.advance').on('click mousedown',function(e){
+				$('.advance').css('right','8px');
+			})
+			$('.advance').on('click mouseup',function(){
+				$('.advance').css('right','16px');
+			})
+			$('.advance').hover(function(){
+				$('.advance').css('right','16px');
+			},function(){
+				$('.advance').css('right','24px');
+			})
+		</script>
+	</body>
+</html>
